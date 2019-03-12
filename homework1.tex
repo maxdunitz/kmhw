@@ -50,16 +50,54 @@ Kernel Methods} %if necessary, replace with your course title
 	\end{enumerate}
 \end{exercise}
 
-\begin{exercise}{2}
-	\begin{enumerate}
-		\item Let $K \triangleq \alpha K_1 + \beta K_2$. That $K$ is symmetric follows immediately from the symmetry of $K_1$ and $K_2$: for some $x, y \in \mathcal{X}, K(x,y) = \alpha K_1(x,y) + \beta K_2(x,y) = \alpha K_1(y,x) + \beta K_2(y,x) = K(y,x)$. That $K$ is positive definite comes almost as easily: for any set of data observations $\{x_i | x_i \in \mathcal{X}, i=1,\ldots,n\}$ and corresponding real weights $\alpha_i$, we have that for $K_j \in \{K_1, K_2 \}, \sum_{i=1}^n \sum_{l=1}^n \alpha_i \alpha_l K_j(x_i, x_l) \geq 0$---and since $\alpha, \beta > 0$, we see that $\sum_{i=1}^n \sum_{=1}^n \alpha_i \alpha_l K(x_i, x_l) = \sum_{i=1}^n \sum_{=1}^n \alpha_i \alpha_l \alpha K_1(x_i, x_l) + \beta K_2(x_i, x_l) = \alpha \cdot \big( \sum_{i=1}^n \sum_{=1}^n \alpha_i \alpha_l K_1(x_i, x_l)\big) + \beta \cdot \big(\sum_{i=1}^n \sum_{=1}^n \alpha_i \alpha_l K_2(x_i, x_l)\big) \geq 0$. Thus $K$ is positive definite.
+\section{Exercise 2}
+\subsection{Problem 1}
+	Let $K \triangleq \alpha K_1 + \beta K_2$. That $K$ is symmetric follows immediately from the symmetry of $K_1$ and $K_2$: for some $x, y \in \mathcal{X}, K(x,y) = \alpha K_1(x,y) + \beta K_2(x,y) = \alpha K_1(y,x) + \beta K_2(y,x) = K(y,x)$. That $K$ is positive definite comes almost as easily: for any set of data observations $\{x_i | x_i \in \mathcal{X}, i=1,\ldots,n\}$ and corresponding real weights $\alpha_i$, we have that for $K_j \in \{K_1, K_2 \}, \sum_{i=1}^n \sum_{l=1}^n \alpha_i \alpha_l K_j(x_i, x_l) \geq 0$---and since $\alpha, \beta > 0$, we see that \begin{align*}\sum_{i=1}^n \sum_{=1}^n \alpha_i \alpha_l K(x_i, x_l) &= \sum_{i=1}^n \sum_{=1}^n \alpha_i \alpha_l \alpha K_1(x_i, x_l) + \beta K_2(x_i, x_l)\\ &= \alpha \cdot \big( \sum_{i=1}^n \sum_{=1}^n \alpha_i \alpha_l K_1(x_i, x_l)\big) + \beta \cdot \big(\sum_{i=1}^n \sum_{=1}^n \alpha_i \alpha_l K_2(x_i, x_l)\big)\\ &\geq \alpha \cdot 0 + \beta \cdot 0 =  0.\end{align*} Thus $K$ is positive definite.
 
-			We now consider what $K$'s RKHS is. If $\mathcal{H}_1$ is the RKHS associated with $K_1$ an $\mathcal{H}_2$ the RKHS associated with $K_2$ are both subspaces of the same Hilbert space, over the same field $\mathcal{F}$ with the same norm $|| \cdot ||$, define $\mathcal{H} \triangleq \mathcal{H}_1 + \mathcal{H}_2 = \{a_1 x_1 + a_2 x_2 | x_1 \in \mathcal{H}_1, x_2 \in \mathcal{H}_2, a_1,a_2 \in \mathcal{F}\}$. Clearly any sequence in $\mathcal{H}$ that is Cauchy with respect to the norm $|| \cdot ||_\mathcal{H}$  will converge since each element of $\mathcal{H}$ is a linear combination of elements of $\mathcal{H}_1$ and $\mathcal{H}_2$. Moreover $\mathcal{H}$ is the smallest vector space (a subspace of space of which $\mathcal{H}_1$ and $\mathcal{H}_2$ were subspaces of) that contains both $\mathcal{H}_1$ an $\mathcal{H}_2$. For every $x \in \mathcal{X}$ it contains the function $K_x(\cdot)$, since $K_x(\cdot) = \alpha K_{x1}(\cdot) + \beta K_{x2} (\cdot)$ where $K_{x1}(\cdot)$ is the function in $\mathcal{H}_1$ that maps each $y \in \mathcal{X}$ to $K_1(x,y)$ and $K_{2x}(\cdot)$ is defined similarly. We have, finally, that $K(x,y) = \langle K_x, K_y \rangle_{\mathcal{H}} = \langle \alpha K_{1x} + \beta K_{2x}, \alpha K_1y + \beta K_{2y} \rangle = \langle$
+		(We may also view this result by applying the positive definiteness of the constituent kernels to write $K_1(x,y) = \langle \phi(x), \phi(y) \rangle_{\mathcal{H}_1}$ and $K_2(x,y) = \langle \psi(x), \psi(y) \rangle_{\mathcal{H}_2}$. Then we can find a feature vector $\Phi(x) = [\sqrt{\alpha}\phi(x), \sqrt{\beta}\psi(x)]$ that is a concatenation of scaled versions of the constituent feature vectors. Then $K(x,y) = \Phi(x)^T\Phi(y)$ and we may apply Aronzjan's thereom.)  	
 
-		\item Let $n \in \mathbb{N}$. Choose any $n$ data observations $\{x_i | x_i \in \mathcal{X}, i=1\ldots n\}$ and corresponding real weights $\alpha_1, \ldots, \alpha_n$. Consider the sum $\sum_{i=1}^n \sum_{j=1}^n \alpha_i \alpha_j \langle \mathbf{\Phi}(x_i), \mathbf{\Phi}(x_j) \rangle = \langle \sum_{i=1}^n \alpha_i \mathbf{\Phi}(x_i), \sum_{j=1}^n \alpha_j \mathbf{\Phi}(x_j) \rangle = \langle s, s \rangle \geq 0,$ where $s=\sum_{i=1}^n \alpha_i \mathbf{\Phi}(x_i)$, by the bilinearity of a (real) inner product space and by the positive-definiteness property of the inner product.
-	\end{enumerate}
+	Now we move onto the problem of a description of the RKHS (that's more satisfying than ``take the span of the feature vectors for each point in $\mathcal{X}$ an complete the space").
 
-\end{exercise}
+
+	%We can view $\mathcal{H} \triangleq \mathcal{H}_1 + \mathcal{H}_2 = \{ax + by | x \in \mathcal{H}_1, y \in \mathcal{H}_2, a,b\in \mathbb{R}\} = \mathcal{H}_1 \bigoplus \mathcal{H}_1^\bot = \mathcal{H}_2 \bigoplus \mathcal{H}_2^\bot$. We know for all $x\in \mathcal{X}$, there exist $K_x^1 \in \mathcal{H}_1$ and $K_x^2 \in \mathcal{H}_2$ such that for all $f \in \mathcal{H}_1, f(x) = \langle f, K_x^1 \rangle_{\mathcal{H}_1}$ and the equivalent result holds for all $f \in \mathcal{H_2}$. For any $f \in \mathcal{H}$ we can decompose $f$ as the sum of an element of $\mathcal{H}_1$ or $\mathcal{H}_2$ and its respective orthogonal complement: $f = f_1 + f_1^\bot$ and  $f = f_2 + f_2^\bot$. We have 
+
+
+We consider two Hilbert spaces $\mathcal{F} = \mathcal{H}_1 \otimes \mathcal{H}_2 = \{(f,g) | f \in \mathcal{H}_1, g \in \mathcal{H}_2\}$ and $\mathcal{H} = \mathcal{H}_1 + \mathcal{H}_2 = \{af+bg | f  \in \mathcal{H}_1, g \in \mathcal{H}_2, a,b\in \mathbb{R}\}$ as well as the mapping $\phi: \mathcal{F} \rightarrow \mathcal{H}$ characterized by $\phi((f,g)) = f+g$. Let us note that $\mathcal{F} = \text{null}(\phi) \oplus \text{null}(\phi)^\bot$. Suppose some $f \in {H}$ can be decomposed two ways as a sum of elements of $\mathcal{H}_1$ and $\mathcal{H}_2$. Then $f = f_1 + f_2 = f_3 + f_4$ and $(f_3-f_1, f_4-f_2)$ is in $\text{null}(\phi)$. Suppose $g \in \text{null}(\phi)^\bot$. Then $\langle g, (f_3-f_1, f_4-f_2)\rangle_\mathcal{F} = 0 \implies \langle g, (f_1, f_2)\rangle_\mathcal{F} = \langle g, (f_3, f_4) \rangle_\mathcal{F}$ so the inner product between an element $f$ of $\text{null}(\phi)^\bot$ and an arbitary element of $\mathcal{F}$ depends only on the sum of the elements of $f$'s decomposition into a sum of elements of $\mathcal{H}_1$ and $\mathcal{H}_2$ and not the decomposition itself. Let the projection of some $(h_1, h_2) \in \mathcal{F}$ into null($\phi^\bot$) be denoted $(h_1^\bot, h_2^\bot)$. Given the inner products of the two RKHSs $\mathcal{H}_1$ an $\mathcal{H}_2$ of the kernels $K_1$ and $K_2$, consider the following inner product between two arbitrary elements $f = f_1+f_2$ and $g=g_1+g_2$ of $\mathcal{H}$:
+$$ \langle f, g \rangle_\mathcal{H} = \frac{1}{\alpha} \langle f_1^\bot, g_1^\bot \rangle_{\mathcal{H}_1} + \frac{1}{\beta} \langle f_2^\bot, g_2^\bot \rangle_{\mathcal{H}_2}$$. 
+It is obviously symmetric, bilinear, and positive as the two inner products used in the definiton have that property. That it's definite follows from the positive definiteness of the constituent inner products: $\langle f, f \rangle_\mathcal{H} = \frac{1}{\alpha} \langle f_1^\bot, f_1^\bot \rangle_{\mathcal{H}_1} + \frac{1}{\beta} \langle f_2^\bot, f_2^\bot \rangle_{\mathcal{H}_2} \implies f_1^\bot = 0 $ and $f_2^\bot = 0 \implies (f_1, f_2) \in $ null($\phi) \implies f_1 + f_2 = f = 0.$
+
+We verify that the reproducing property holds. For some $x \in \mathcal{X}$, let $K_{x1} \in \mathcal{H}_1$ be the reproducing kernel $K_1(x, \cdot)$ and $K_{x2} \in \mathcal{H}_2$ the rk of $K_2(x, \cdot)$. Let us define, for this same $x\in \mathcal{X}$, $K_x = \alpha K_{x1} + \beta K_{x2} \in \mathcal{H}$. Consider some $f \in \mathcal{X}$, which can be decomposed (arbitrarily) into $f_1 \in \mathcal{H}_1$ and $f_2 \in \mathcal{H}_2$. Then we have that
+
+\begin{align*} 
+	\langle f, K_x \rangle_{\mathcal{H}} &= \langle (f_1^\bot, f_2^\bot), (\alpha K_{x1}^\bot, \beta K_{x2}^\bot) \rangle_{\mathcal{F}}\\
+	&= \langle (f_1^\bot, f_2^\bot), (\alpha K_{x1}^\bot, \beta K_{x2}^\bot) \rangle_{\mathcal{F}} + 0 \\
+	&= \langle (f_1^\bot, f_2^\bot), (\alpha K_{x1}^\bot, \beta K_{x2}^\bot) \rangle_{\mathcal{F}} + 
+	\langle (f_1^\bot, f_2^\bot), (\alpha K_{x1} - \alpha K_{x1}^\bot, \beta K_{x2} - \beta K_{x2}^\bot) \rangle_{\mathcal{F}}\\
+	&= \langle (f_1^\bot, f_2^\bot), (\alpha K_{x1}, \beta K_{x2}) \rangle_{\mathcal{F}}\\
+	&= \frac{1}{\alpha} \langle f_1^\bot,  \alpha K_{x1} \rangle_{\mathcal{H}_1} + \frac{1}{\beta} \langle f_2^\bot, \beta K_{x2}\rangle_{\mathcal{H}_2}\\
+	&= f_1^\bot(x) + f_2^\bot(x) = f_1(x) + f_2(x) = f(x),
+\end{align*} where we have used the linearity of the projection operator, the orthogonality between a vector in a subspace and one in its orthogonal complement, bilinearity, the definition of $\langle \cdot, \cdot \rangle_\mathcal{H}$ given above, and the fact that $f_1+f_2 = \phi(f) = \phi((f_1, f_2)) = \phi((f_1^\bot, f_2^\bot)) + \phi(f_1^{\text{null}}, f_2^{\text{null}}) = f_1^\bot + f_2^\bot + (f_1^{\text{null}}, f_2^{\text{null}}) = f_1^\bot + f_2^\bot + 0 = f_1^\bot + f_2^\bot.$ Hence, the reproducing property holds.
+
+The completeness of $\mathcal{F}$ comes immediately from the tensor product property and the completeness of the constituent spaces. Since we know by the Cauchy-Schwarz inequality that the orthogonal projection map $(f_1, f_2) \rightarrow (f_1^\bot, f_2^\bot)$ is linear and bounded and hence continuous\footnote{$||P_\bot u||^2 = \langle Pu, Pu\rangle = \langle Pu, u \rangle \leq ||Pv|| \cdot ||v|| \implies ||Pv|| \leq ||v||$. We noted that $0 = \langle Pv, v - Pv\rangle \implies \langle Pv, v\rangle = \langle Pv, Pv\rangle$}, and since we know the subpsaces $\mathcal{H}_1$ and $\mathcal{H}_2$ are complete, we can construct a Cauchy sequence of elements of $\mathcal{H}$ that can be decomposed into corresponding Cauchy sequences in those two subpsaces an from that we can show that under the corresponding norm $||f||_\mathcal{H} = \sqrt{||\frac{1}{\alpha} f_1^\bot||^2 + ||\frac{1}{\beta}f_2^\bot||^2}$, we have that $\mathcal{H}$ is a (complete) Hilbert space.
+
+
+
+%	We now consider what $K$'s RKHS is. If $\mathcal{H}_1$ is the RKHS associated with $K_1$ an $\mathcal{H}_2$ the RKHS associated with $K_2$ are both subspaces of the same Hilbert space, over the same field $\mathcal{F}$ with the same norm $|| \cdot ||$, define $\mathcal{H} \triangleq \mathcal{H}_1 + \mathcal{H}_2 = \{a_1 x_1 + a_2 x_2 | x_1 \in \mathcal{H}_1, x_2 \in \mathcal{H}_2, a_1,a_2 \in \mathcal{F}\}$. Clearly any sequence in $\mathcal{H}$ that is Cauchy with respect to the norm $|| \cdot ||_\mathcal{H}$  will converge since each element of $\mathcal{H}$ is a linear combination of elements of $\mathcal{H}_1$ and $\mathcal{H}_2$. Moreover $\mathcal{H}$ is the smallest vector space (a subspace of space of which $\mathcal{H}_1$ and $\mathcal{H}_2$ were subspaces of) that contains both $\mathcal{H}_1$ an $\mathcal{H}_2$. For every $x \in \mathcal{X}$ it contains the function $K_x(\cdot)$, since $K_x(\cdot) = \alpha K_{x1}(\cdot) + \beta K_{x2} (\cdot)$ where $K_{x1}(\cdot)$ is the function in $\mathcal{H}_1$ that maps each $y \in \mathcal{X}$ to $K_1(x,y)$ and $K_{2x}(\cdot)$ is defined similarly. We have, finally, that $K(x,y) = \langle K_x, K_y \rangle_{\mathcal{H}} = \langle \alpha K_{1x} + \beta K_{2x}, \alpha K_1y + \beta K_{2y} \rangle = \langle$
+
+
+\subsection{Problem 2}
+		Let $n \in \mathbb{N}$. Choose any $n$ data observations $\{x_i | x_i \in \mathcal{X}, i=1\ldots n\}$ and corresponding real weights $\alpha_1, \ldots, \alpha_n$. Consider the sum $$\sum_{i=1}^n \sum_{j=1}^n \alpha_i \alpha_j \langle \mathbf{\Phi}(x_i), \mathbf{\Phi}(x_j) \rangle = \langle \sum_{i=1}^n \alpha_i \mathbf{\Phi}(x_i), \sum_{j=1}^n \alpha_j \mathbf{\Phi}(x_j) \rangle = \langle s, s \rangle \geq 0,$$ where $s=\sum_{i=1}^n \alpha_i \mathbf{\Phi}(x_i)$, by the bilinearity of a (real) inner product space and by the positive-definiteness property of the inner product.
+
+
+
+
+
+
+	Take the completion of the span of $\{\Psi(x) | x \in \mathcal{X}\}$. This space is therefore a complete subspace of $\mathcal{F}$ and hence a Hilbert space.
+
+	By the Aronszajn theorem, given the positive definite kernel $K$ we can construct the unique Hilbert space of functions on $\mathcal{X}$ for which $K$ is reproducing as the completion of the functions $K_x: \mathcal{F} \rightarrow \mathbb{R} = K(\Psi(x), \cdot)$
+	
+%	can be constructed as the completion of all the vectors $\{\Psi(x) | x \in \mathcal{X}\}$. Let $f \in \mathcal{F}$. Then $f = \sum_i \ma
 
 \section{Exercise 3}
 \subsection{Problem 1}  
@@ -72,14 +110,57 @@ Now let $(f_n)_{n \in \mathbb{N}}$ be a Cauchy sequence in the pre-Hilbert space
 Fix $x\in [0,1]$. Since $(f_n)_{n \in \mathbb{N}}$ is a Cauchy sequence of functions in $\mathcal{H}$, and since we established earlier that $|f_n(x)| \leq ||f_n||_\mathcal{H} \sqrt{x}$, we have that for all $\epsilon > 0$ there exists an $N$ such that $a,b > N \implies ||f_a - f_b||_\mathcal{H} < \epsilon$ and hence  $|f_a(x) - f_b(x)| < \epsilon \sqrt{x}$. Thus, if we want $|f_a(x) - f_b(x)| < \epsilon_0$, we choose $N_0$ such that $a,b > N_0 \implies ||f_a - f_b || \leq \frac{\epsilon_0}{\sqrt{x}}$ and hence $|f_a(x) - f_b(x)| < \frac{\epsilon_0}{\sqrt{x}}\sqrt{x} = \epsilon_0.$ Thus for all $x \in [0,1]$ we have shown that $(f_n(x))_{n \in \mathbb{N}}$ is a Cauchy sequence in $\mathbb{R}$ and hence convergest to a limit $f(x) \in \mathbb{R}$. Define $f_L$ as the set of pointwise limits defined in this way. We see trivially that $f_L(0)$ as the limit of functions in the pre-Hilbert space of functions each satisfying $f_n(0) = 0$ must itself be 0. Finally, consider the function $g$, defined in the previous paragraph as a function in the equivalence class of functions $f_L'$. We have, for all $x \in [0,1], f_L(x) = \lim_{n\rightarrow \infty} f_n(x) = \lim_{n\rightarrow \infty} \int_0^x f_n'(t)dt = \int_0^x \lim_{n \rightarrow \infty} f_n'(t) dt = \int_0^x f'_L(t) dt$, where $f'_L$ was defined in the previous paragraph as the $\lim_{n\rightarrow \infty} f'_n$. By the fundamental theorem of Lebesque integral calclulus we must have that the derivative of $f_L$ is $f'_L$ almost everywhere and so $f_L$ has derivative in $L^2([0,1])$. Finally, since $f_L(0) = 0$, we have that $f_L(x) = f_L(0) + \int_0^x f'_L(t) dt$ for all $x \in [0,1]$ and since $f_L'\in L^2([0,1])$, $f_L$ must be absolutely continuous.\footnote{We have abused notation slightly by refering to $f'_L$ as a function and not an equivalence class of functions but the result holds with any element of $f'_L$ so so long as we say the magic words ``almost everywhere."} Hence $\mathcal{H}$ is complete.
 
 \subsubsection{RKHS}
+The kernel associated with this RKHS is $K(x,y) = \min(x,y).$ We will show that the following is the reproducing kernel $$K_x(y) = \min(x,y) = \begin{cases} y &\mbox{if } y \leq x \\ 
+x & \mbox{otherwise } \end{cases}.$$ 
 
+We will define as its derivative $K'_x(y) = \frac{d}{dy} K_x(y) = \mathbf{1}_{y \leq x}$ (with $K'_x(x) = 1$). It is continuous and differentiable almost everywhere and hence absolutely continuous. This derivative is clearly in $L^2([0,1])$. Moreover $K_x(0) = \min(x,0) = 0$. So $K_x \in \mathcal{H}$. 
+
+Finally we verify the reproducing properity: $f(x) = \langle f, K_x \rangle_\mathcal{H} = \int_0^1 f'(y) \mathbf{1}_{y \leq x} dy = 0+ \int_0^x f'(y) dy = f(0) + \int_0^x f'(y) dy$.
+
+\subsection{Problem 2}
+Let $\mathcal{H}_2 = \{f: [0,1] \rightarrow \mathbb{R} | f $ is absolutely continuous, $f' \in L^2([0,1]), f(0) = 0, f(1) = 0\}$. Call the Hilbert space from the previous problem $\mathcal{H}_1$. Note that the null space of the map from $\mathcal{H}_1 \rightarrow \mathbb{R}$ defined by $f \rightarrow f(1)$ is precisely $\mathcal{H}_2$. This map is clearly linear and we can show it's continuous by proving that it's bounded. Note that $||f(1)||_\mathbb{R} = |f(1)| = |\int_0^1 f'(t)dt| = |\langle f, \text{Id} \rangle_{H_1} | \leq ||f||_{\mathcal{H}_1}||\cdot ||\text{Id}||_{\mathcal{H}_1} = \frac{1}{3} ||f||_{\mathcal{H}_1}$, where we used the Cauchy-Schwarz inequality. Thus since this map from $\mathcal{H}_1 \rightarrow \mathbb{R}$ is a bounded linear operator, its nullspace is a closed subspace of $\mathcal{H}_1$. Thus $\mathcal{H}_2$ is a closed subspace of $\mathcal{H}_1$ and is itself therefore (as a closed subspace of a complete subspace and therefore a complete space) a Hilbert space (with the same inner product of the previous problem).
+
+To satisfy the reproducing property, our reproducing kernel $K_x$ should satisfy $f(x) = \langle f, K_x \rangle_{\mathcal{H}_2} = \int_0^1 f'(t) K_x'(t) dt = [f(t)K_x'(t)]_0^1 - \int_0^1 K_x''(t)f(t)dt =  - \int_0^1 K_x''(t)f(t)dt$ given the boundary conditions $f(0)=f(1)=0$ and $K_x(0) = K_x(1) =0$.
+
+Twice integrating $K_x''(t) = -\delta(t-x)$, using integration constants to comply with the boundary conditions $K_x(0) = K_x(1) = 0$, we get $K_x(t) = \begin{cases} (-x+1)t  &\mbox{if } t < x \\ 
+-xt+x & \mbox{otherwise } \end{cases}$ for $x,t \in [0,1]$. We may rewrite this as $K(x,y) = K_x(y) = \min(x,y) - xy.$ This is differential almost everywhere and it is continuous, hence it is absolutely continuous. By construction, $K_x(0) = K_x(1) = 0$. We have that $K_x'(y) = \mathbf{1}_{x<y} -y$, which is clearly in $L^2([0,1])$. Thus $K_x \in \mathcal{H}_2$. 
+
+We note that, on $[0,1]^2$, $K(x,y) = \min(x,y) - xy = \min(x,y) - \min(x,y)\cdot \max(x,y) = \min(x,y) \cdot (1-\max(x,y)) = \min(x,y) \cdot \min(1-x,1-y)$ is the product of two p.d. kernels.
+
+Finally, we verify that it is a reproducing kernel:
+$$\langle f, K_x \rangle_{\mathcal{H}_2} = \int_0^1 f'(t) K_x'(t) dt = \int_0^1 f'(x)\mathbf{1}_{x<t} dt - x\int_0^1f'(t)dt = \int_0^x f'(t) dt - [xf(t)]_0^1 = f(x)$$
+
+%Letting $L$ be the second-order differential operator operating on one variable, we may rewrite this as
+
+%$$f(x) = \int_0^1 LG(x,t)f(t)dt \iff Lf(x) = L(\int_0^1G(x,t)f(t)dt$$, suggesting that $f(x) = \int_0^1 G(x,t)f(t)dt$.
+
+%at $f_2 \equiv 0$, for every $\epsilon > 0$, whenever $||f_1 - f_2||_{\mathcal{H}_1} < \delta = \sqrt{\epsilon}$, for some $f_1, f_2 \in \mathcal{H}_1$, we have that $||f_1 - f_2||_{\mathcal{H}_1}^2 = |\int_0^1 f_1'(t) dt - \int_0^1 f_2'(t) dt| = |f_1(1) - f_1(0) - f_2(1) + f_2(0)| = |f_1(1) - f_2(1)| < \delta^2 = \epsilon$. 
+
+\subsection{Problem 3}
+First we note that this bilinear form is obviously, well, bilinear, it's positive semi-definite ($f(u)^2 + f'(u)^2 \geq 0 \forall u \in [0,1]$) but not necessarily positive definite since it's possible that $\int_0^1 f(u)g(u) du = -\int_0^1 f'(u)g'(u)du$ for $f \neq g$).
+
+We want to find a kernel $K$ so that the reproducing property to hold: $f(x) = \langle f, K_x \rangle_\mathcal{H} =  \int_0^1 f(u)K_x(u)du + \int_0^1 f'(u)K_x'(u)du$, where since $f, K_x \in \mathcal{H}, f(0) = f(1) = 1$. We rewrite this using integration by parts and the boundary condition:
+$$f(x) = \langle f, K_x \rangle_\mathcal{H} = \int_0^1 f(u)[K_x(u) - K_x''(u)]du$$.
+
+In other words, we want $K_x(u) - K_x''(u) = \delta(u-x)$ such that $K_x(0) = K_x(1) = 0$. I've solved this and frankly it's hell just to type it in LaTex so I will try to think of another way.
+
+First we let $K_1(f,g) = \int_0^1 f(u)g(u) du$ and $K_2(f,g) = \int_0^1 f'(u)g'(u) du$. $K_1$ is a kernel %but $K_2$ is merely a bilinear form. In other words, $K_1$ is positive definite and $K_2$ is positive definite. But $K(f,g)$ is necessarily positive definite because given functions $f_1 \ldots f_n \in \mathcal{H}$ their Gram matrix is positive definite 
+since if we have $\sum_{i=1}^n \alpha_i\sum_{j=1}^n \alpha_j \int_0^1f_i(u)f_j(u)du = \int_0^1 \big(\sum_{i=1}^n \alpha_i f_i(u) \big) \big(\sum_{j=1}^n \alpha_j f_j(u)\big) du = \int_0^1 \big(\sum_{i=1}^n \alpha_i f(u)\big)^2 du \geq 0$. By an identical argument we have that $K_2(f,g)$ is a positive definite kernel even though it is a bilinear form and not a proper inner product. Hence $K(f,g) = K_1(f,g) + K_2(f,g)$, as a nonnegative-weighted sum of positive definite kernels, is itself a positive definite kernel.
+
+Since $K_1(f,g)$ is already a 
 
 
 \section{Exercise 4}
+\subsection{1}
+We have the constraint $||f||_{\mathcal{H}_K} \leq B$. We note that the projection onto span$\{K_{x_1},\ldots, K_{x_n}\}$
+
+
+
 \subsection{4}
 We wish to find $f^*(u) = \sup_x (xu - \max(0, 1-yx)^2)$. First let $y=-1$. We note that $\max(0, 1+x) = 0$ if $x\leq -1$ and $1+x$ otherwise. Thus, if $\sup_x (xu-\max(0,1+x))$ happens where $x \leq -1$, we have that $f^*(u) = xu$ and if $\sup_x (xu-\max(0,1+x))$ happens where $x \geq -1$, we have (by the first order condition and the concavity of the expression) that $f^*(u) = u(\frac{u}{4} -1)$ and is attained where $x = \frac{u}{2} -1$. Thus, if $\frac{u}{2} -1 \leq -1 \iff u\leq 0$ we will be in the former case and if not we'll be in the latter case. Hence, we have that $f^*(u) = \infty $ if $u \leq 0$ and $u(\frac{u}{4}-1)$ if not. Now let's consider the case where $y=+1$. By the same argument above, we have that $f^*(u) = \infty$ when $u \leq 0$ and $u(\frac{u}{4} + 1)$ otherwise. We may thereby write $f^*(u) = l_{y-hinge}^*(u) = \infty$ if $u\leq 0$ and $u(\frac{u}{4} + y)$.
 
 We wish to find $f^*(u) = \sup_x(xu - \log(1+e^{-yx})$. We note that this is a linear function in x minus a convex function and is thus concave. We apply the first order conditions and see that this must occur when $u = \frac{-y e^{-yx}}{1+e^{-yx}}  = -y(1-\textnormal{sigmoid}(yx))$ or $x = \frac{1}{y} \log (\frac{u+y}{1-u-y})$ In this case $f^*(u) = \frac{u}{y}\log (\frac{u+y}{1-u-y}) - \log \big(1+ e^{-y\log \big(\frac{u+y}{1-u-y}\big)}\big) = \frac{u}{y} \log(\frac{u+y}{1-u-y}) - \log (\frac{1}{u+y})$, which is defined for $u \in (-y, 1-y)$. 
+
 
 
 \end{document}
