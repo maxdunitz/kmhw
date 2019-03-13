@@ -88,14 +88,14 @@ The completeness of $\mathcal{F}$ comes immediately from the tensor product prop
 \subsection{Problem 2}
 		Let $n \in \mathbb{N}$. Choose any $n$ data observations $\{x_i | x_i \in \mathcal{X}, i=1\ldots n\}$ and corresponding real weights $\alpha_1, \ldots, \alpha_n$. Consider the sum $$\sum_{i=1}^n \sum_{j=1}^n \alpha_i \alpha_j \langle \mathbf{\Phi}(x_i), \mathbf{\Phi}(x_j) \rangle = \langle \sum_{i=1}^n \alpha_i \mathbf{\Phi}(x_i), \sum_{j=1}^n \alpha_j \mathbf{\Phi}(x_j) \rangle = \langle s, s \rangle \geq 0,$$ where $s=\sum_{i=1}^n \alpha_i \mathbf{\Phi}(x_i)$, by the bilinearity of a (real) inner product space and by the positive-definiteness property of the inner product.
 
+	Take the completion of the span of $\{\Psi(x) | x \in \mathcal{X}\}$. This space is therefore a complete (henced closed) subspace of $\mathcal{F}$ and hence a Hilbert space. Call it $\mathcal{H}_1$.
 
+	Consider the space of functions $f$ from $\mathcal{X}$ to $\mathbb{R}$ such that there exists a function $f_1$ in $\mathcal{H}_1$ such that $f(x) = \langle f_1, \Psi(x) \rangle_\mathcal{F}$. Call this space $\mathcal{H}$. Let $\langle f, g \rangle_\mathcal{H} = \langle f_1, g_1 \rangle_\mathcal{F}$ where $f_1$ is the element of $\mathcal{H}_1$ for which $f(x) = \langle f_1, \Psi(x) \rangle_\mathcal{F}$ for all $x \in \mathcal{X}$. 
 
+	We have that $f(x) = \langle f_1, \Psi(x) \rangle_\mathcal{F} = \langle f_1, K_{x_1} \rangle_\mathcal{F} = \langle f, K_x\rangle_\mathcal{H}$ so the reproducing property holds. The kernel $K(x,y) = \langle K_x, K_y \rangle_\mathcal{H} = \langle K_{x_1}, K_{y_1} \rangle_\mathcal{F} = \langle \Psi(x), \Psi(y) \rangle_\mathcal{F}$, as desired. Thus $\mathcal{H}$ is a space of functions from $\mathcal{H} \rightarrow \mathcal{F}$ (and in particular the subspace $\mathcal{H}_1$ of $\mathcal{F}$ of the completed span, as described in the proof of the Aronsjan theoreom. $K_x$ is a function in $\mathcal{H}$ that maps $x \in \mathcal{X}$ to $K_{x_1} \in \mathcal{H} \subset \mathcal{F}$ where $K_{x_1} = \Psi(x)$. The inner product on $\mathcal{H}$ is obiosuly an inner product as it represents an inner product on $\mathcal{F}$.
+	
 
-
-
-	Take the completion of the span of $\{\Psi(x) | x \in \mathcal{X}\}$. This space is therefore a complete subspace of $\mathcal{F}$ and hence a Hilbert space.
-
-	By the Aronszajn theorem, given the positive definite kernel $K$ we can construct the unique Hilbert space of functions on $\mathcal{X}$ for which $K$ is reproducing as the completion of the functions $K_x: \mathcal{F} \rightarrow \mathbb{R} = K(\Psi(x), \cdot)$
+%	By the Aronszajn theorem, given the positive definite kernel $K$ we can construct the unique Hilbert space of functions on $\mathcal{X}$ for which $K$ is reproducing as the completion of the functions $K_x: \mathcal{F} \rightarrow \mathbb{R} = K(\Psi(x), \cdot)$
 	
 %	can be constructed as the completion of all the vectors $\{\Psi(x) | x \in \mathcal{X}\}$. Let $f \in \mathcal{F}$. Then $f = \sum_i \ma
 
@@ -151,7 +151,7 @@ $$\bigg(-(e^u+1)(e^u-1) -(e+1)(e-1)(e^{2u}-e^{2x})\mathbf{1}_{u\geq x} + (e^{2u}
 
 This should have the reproducing function and boundary conditions by construction. It is trivial to verify symmetry.
 
-We can factor this mess into hyperbolic sinusoids but first let's look at the homogeneous equation $K_x(u) - K_x''(u) = 0$. It has solutions like $e^x$ or $e^{-x}$. Since scaling an exponential is equivalent to shifting it these can be delayed or advanced. Let $K_x(u) = a \sinh u + b \cosh u$. A solution that respects our first boundary condition is $K_x(u) = \sinh u$ and one that respects our second condition is $K_x(u) = \sinh (u-1)$. We're looking for a solution, then, of $K_x(u) = \alpha \sinh u + \beta \sinh (u-1)$ so that $K_x(0) = K_x(1) = 0$. We also wish for the derivative at $x$ from the left and from the right
+To amke this cleaner we can factor this mess into hyperbolic sinusoids but first let's look at the homogeneous equation $K_x(u) - K_x''(u) = 0$. It has solutions like $e^x$ or $e^{-x}$. Since scaling an exponential is equivalent to shifting it these can be delayed or advanced. Let $K_x(u) = a \sinh u + b \cosh u$. A solution that respects our first boundary condition is $K_x(u) = \sinh u$ and one that respects our second condition is $K_x(u) = \sinh (u-1)$. We're looking for a solution, then, of $K_x(u) = \alpha \sinh u + \beta \sinh (u-1)$ so that $K_x(0) = K_x(1) = 0$. For the particular solution
 
 %First we let $K_1(f,g) = \int_0^1 f(u)g(u) du$ and $K_2(f,g) = \int_0^1 f'(u)g'(u) du$. $K_1$ is a kernel %but $K_2$ is merely a bilinear form. In other words, $K_1$ is positive definite and $K_2$ is positive definite. But $K(f,g)$ is necessarily positive definite because given functions $f_1 \ldots f_n \in \mathcal{H}$ their Gram matrix is positive definite 
 %since if we have $\sum_{i=1}^n \alpha_i\sum_{j=1}^n \alpha_j \int_0^1f_i(u)f_j(u)du = \int_0^1 \big(\sum_{i=1}^n \alpha_i f_i(u) \big) \big(\sum_{j=1}^n \alpha_j f_j(u)\big) du = \int_0^1 \big(\sum_{i=1}^n \alpha_i f(u)\big)^2 du \geq 0$. By an identical argument we have that $K_2(f,g)$ is a positive definite kernel even though it is a bilinear form and not a proper inner product. Hence $K(f,g) = K_1(f,g) + K_2(f,g)$, as a nonnegative-weighted sum of positive definite kernels, is itself a positive definite kernel.
@@ -196,9 +196,31 @@ Since (3) is convex, (it is positive sum of a convex function $R(u)$ and a conve
 
 
 \subsection{4}
-We wish to find $f^*(u) = \sup_x (xu - \max(0, 1-yx)^2)$. First let $y=-1$. We note that $\max(0, 1+x) = 0$ if $x\leq -1$ and $1+x$ otherwise. Thus, if $\sup_x (xu-\max(0,1+x))$ happens where $x \leq -1$, we have that $f^*(u) = xu$ and if $\sup_x (xu-\max(0,1+x))$ happens where $x \geq -1$, we have (by the first order condition and the concavity of the expression) that $f^*(u) = u(\frac{u}{4} -1)$ and is attained where $x = \frac{u}{2} -1$. Thus, if $\frac{u}{2} -1 \leq -1 \iff u\leq 0$ we will be in the former case and if not we'll be in the latter case. Hence, we have that $f^*(u) = \infty $ if $u \leq 0$ and $u(\frac{u}{4}-1)$ if not. Now let's consider the case where $y=+1$. By the same argument above, we have that $f^*(u) = \infty$ when $u \leq 0$ and $u(\frac{u}{4} + 1)$ otherwise. We may thereby write $f^*(u) = l_{y-hinge}^*(u) = \infty$ if $u\leq 0$ and $u(\frac{u}{4} + y)$.
+\subsubsection{Hinge loss}
+We wish to find $f^*(u) = \sup_x (xu - \max(0, 1-yx)^2)$. First let $y=-1$. We note that $\max(0, 1+x) = 0$ if $x\leq -1$ and $1+x$ otherwise. Thus, if $\sup_x (xu-\max(0,1+x))$ happens where $x \leq -1$, we have that $f^*(u) = xu$ and if $\sup_x (xu-\max(0,1+x))$ happens where $x \geq -1$, we have (by the first order condition and the concavity of the expression) that $f^*(u) = u(\frac{u}{4} -1)$ and is attained where $x = \frac{u}{2} -1$. Thus, if $\frac{u}{2} -1 \leq -1 \iff u\leq 0$ we will be in the former case and if not we'll be in the latter case. Hence, we have that $f^*(u) = \infty $ if $u \leq 0$ and $u(\frac{u}{4}-1)$ if not. Now let's consider the case where $y=+1$. By the same argument above, we have that $f^*(u) = \infty$ when $u \geq 0$ and $u(\frac{u}{4} + 1)$ otherwise. We may thereby write $f^*(u) = l_{y-hinge}^*(u) = \infty$ if $uy\geq 0$ and $u(\frac{u}{4} + y)$ otherwise.
 
-We wish to find $f^*(u) = \sup_x(xu - \log(1+e^{-yx})$. We note that this is a linear function in x minus a convex function and is thus concave. We apply the first order conditions and see that this must occur when $u = \frac{-y e^{-yx}}{1+e^{-yx}}  = -y(1-\textnormal{sigmoid}(yx))$ or $x = \frac{1}{y} \log (\frac{u+y}{1-u-y})$ In this case $f^*(u) = \frac{u}{y}\log (\frac{u+y}{1-u-y}) - \log \big(1+ e^{-y\log \big(\frac{u+y}{1-u-y}\big)}\big) = \frac{u}{y} \log(\frac{u+y}{1-u-y}) - \log (\frac{1}{u+y})$, which is defined for $u \in (-y, 1-y)$. 
+Our dual then is $\max_\mu -R^*(\mu) - \frac{1}{4\lambda} \mu^T K \mu$ subject to $\mu \succeq 0$ an $\mu$ is on the domain of $R^*$. From problem (2) We saw that $R^*(u) = \frac{1}{n} \sum_{i=1}^n l^*_{y_i}(nu_i)$ and is defined on the intersections of the constituent domains.
+
+Hence (if the previous parts are correct):
+
+$\max - \sum_{i=1}^n  l^*_{y_i}(\mu_i)  - \frac{1}{4\lambda} \mu^T K \mu$ subject to $\mu \succeq 0$ and $\mu$ in the domain of $R^*$. 
+
+$\max - \sum_{i=1}^n  \mu_i(\frac{\mu_i}{4} + y) - \frac{1}{4\lambda} \mu^T K \mu$ subject to $\mu \succeq 0$ and $\mu \otimes y \leq 0$. 
+
+
+
+
+
+\subsubsection{Logistic loss}
+We wish to find $f^*(u) = \sup_x(xu - \log(1+e^{-yx})$. We note that this is a linear function in x minus a convex function and is thus concave. We apply the first order conditions and see that this must occur when $u = \frac{-y e^{-yx}}{1+e^{-yx}}  = -y(1-\textnormal{sigmoid}(yx))$ or $x = \frac{1}{y} \log (\frac{u+y}{1-u-y})$ In this case $f^*(u) = \frac{u}{y}\log (\frac{u+y}{1-u-y}) - \log \big(1+ e^{-y\log \big(\frac{u+y}{1-u-y}\big)}\big) = \frac{u}{y} \log(\frac{u+y}{1-u-y}) - \log (\frac{1}{u+y})$, which is defined for $u \in (-y, 1-y)$ and is $\infty$ otherwise by extended-value extension.
+
+Our dual then is $\max_\mu -R^*(\mu) - \frac{1}{4\lambda} \mu^T K \mu$ subject to $\mu \succeq 0$ an $\mu$ is on the domain of $R^*$. From problem (2) We saw that $R^*(u) = \frac{1}{n} \sum_{i=1}^n l^*_{y_i}(nu_i)$ and is defined on the intersections of the constituent domains.
+
+Hence (if the previous parts are correct):
+
+$\max_{\mu} -\sum_{i=1}^n \frac{n\mu_i}{y_i} \log(\frac{n\mu_i+y_i}{1-n\mu_i-y_i}) - \log (\frac{1}{\mu_i+y}) - \frac{1}{4\lambda} \mu^T K \mu$ subject to $\mu \succeq 0$ and $ 1-y \succeq -y$. (One would need to take the intersection of these constraints, which I suspect are off as I did the math while very sick (and still am).
+
+
 
 
 
